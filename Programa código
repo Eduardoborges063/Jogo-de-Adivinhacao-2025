@@ -1,0 +1,121 @@
+using System.Data;
+
+namespace JogodeAdivinhacao.ConsoleApp1
+{
+
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("-------------------------------");
+                Console.WriteLine("Jogo Da Adivinhação");
+                Console.WriteLine("--------------------------------");
+
+
+                //int valorMaximo = int.MaxValue;
+                //mostra o valor maximo
+
+                //Escolha um nível de dificuldade
+                Console.WriteLine("Escolha um nível de dificuldade:");
+                Console.WriteLine("----------------------------------------");
+                Console.WriteLine("1 - Fácil (20 tentativas)");
+                Console.WriteLine("- vida fácil em...");
+                Console.WriteLine("///////////////////////////////////////////");
+                Console.WriteLine("2 - Médio (10 tentativas)");
+                Console.WriteLine(" - vc pode ser melhor que isso...");
+                Console.WriteLine("///////////////////////////////////////////");
+                Console.WriteLine("3 - Difícil (5 tentativas)");
+                Console.WriteLine(" - vc quer um desafio!");
+                Console.WriteLine("----------------------------------------");
+
+                int totalDeTentativas = 0;
+
+                Console.Write(" Qual seu nivel de sorte: ");
+                string entrada = Console.ReadLine();
+
+                if (entrada == "1")
+                    totalDeTentativas = 20;
+                else if (entrada == "2")
+                    totalDeTentativas = 10;
+                else if (entrada == "3")
+                    totalDeTentativas = 5;
+
+                // Geração de número secreto
+                Random GeradorDeNumeros = new Random();
+
+                int NumeroSecreto = GeradorDeNumeros.Next(1, 51);
+
+
+                for (int tentativa = 1; tentativa <= totalDeTentativas; tentativa++)
+                {
+                    Console.Clear();
+
+
+                    Console.WriteLine("----------------------------------------");
+                    Console.WriteLine($"Tentativa {tentativa} de {totalDeTentativas}");
+                    Console.WriteLine("----------------------------------------");
+
+                    // Lógica do jogo
+                    Console.WriteLine(" Escolha seu número da sorte :");
+                    Console.WriteLine("--------------------------------");
+                    int numeroDigitado = Convert.ToInt32(Console.ReadLine());
+                    //
+
+                    //historico
+
+                    Console.WriteLine("-------------Historico-------------");
+                    Console.WriteLine(++numeroDigitado);
+
+                    //
+                    if (numeroDigitado == NumeroSecreto)
+                    {
+                        Console.WriteLine("----------------------------------");
+                        Console.WriteLine(" :)Você acertou!:)");
+                        Console.WriteLine("----------------------------------");
+                        Console.ReadLine();
+
+                        break;
+                    }
+
+                    if (tentativa == totalDeTentativas)
+                    {
+                        Console.WriteLine("----------------------------------------");
+                        Console.WriteLine($"F! Você usou todas as tentativas. O número era {NumeroSecreto}.");
+                        Console.WriteLine("----------------------------------------");
+
+                        Console.WriteLine("----------------------------------");
+                        Console.WriteLine(" :( Não foi dessa vez :( ");
+                        Console.WriteLine("----------------------------------");
+
+                        break;
+                    }
+                    else if (numeroDigitado > NumeroSecreto)
+                    {
+                        Console.WriteLine("----------------------------------------");
+                        Console.WriteLine("O número digitado é maior que o número secreto.");
+                        Console.WriteLine("----------------------------------------");
+                    }
+                    else
+
+                        Console.WriteLine("----------------------------------------");
+                    Console.WriteLine("O número digitado é menor que o número secreto.");
+                    Console.WriteLine("----------------------------------------");
+
+
+                    Console.WriteLine("Aperte ENTER para continuar...");
+                    Console.ReadLine();
+                }
+                Console.Write("Deseja continuar? (S/N): ");
+                string opcaoContinuar = Console.ReadLine().ToUpper();
+
+                if (opcaoContinuar != "S")
+                    break;
+            }
+        }
+    }
+
+}   
